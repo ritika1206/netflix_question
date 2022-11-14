@@ -3,7 +3,7 @@ namespace :subscription do
   task :send_expiration_email => [:environment] do
     subscriptions = Subscription.includes(:user)
     subscription.each do |subscription|
-      case subscription.created_at + subscription.validity - Date.today
+      case subscription.expiration_date - Date.today
       when 1.month
         expiring_in = 1.month
       when 1.week

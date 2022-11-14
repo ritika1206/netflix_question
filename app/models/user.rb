@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  has_many :subsciption_ids, class_name: 'UserSubscription', dependent: :destroy, counter_cache: :subscriptions_count, foreign_key: :user_id, inverse_of: :user 
-  has_many :subsciptions, through: :subsciption_ids, source: :subscription
+  has_many :user_subscriptions, dependent: :destroy, counter_cache: :subscriptions_count
+  has_many :subscriptions, through: :user_subscriptions, source: :subscription
+  has_one :active_subscription, -> { active }, through: :user_subscriptions, source: :subscription
 
   validates :name, :email, presence: true
   validates :name, format: { with: Netflix::REGEX_NAME }, allow_blank: true
