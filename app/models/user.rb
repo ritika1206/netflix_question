@@ -10,7 +10,7 @@ class User < ApplicationRecord
   private
 
     def active_subscriptions_count
-      subsciptions.where(status: 'active').count
+      subsciptions.active.count
     end
 end
 
