@@ -2,7 +2,7 @@ class User < ApplicationRecord
   ACTIVE_SUBSCRIPTIONS_COUNT = 1
 
   has_many :user_subscriptions, dependent: :destroy, counter_cache: :subscriptions_count
-  has_many :subscriptions, through: :user_subscriptions, source: :subscription
+  has_many :subscriptions, through: :user_subscriptions
   has_one :active_subscription, -> { active }, through: :user_subscriptions, source: :subscription
 
   validates :name, :email, presence: true

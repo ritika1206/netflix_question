@@ -1,7 +1,7 @@
 class Subscription < ApplicationRecord
   MAXIMUN_USER_COUNT = 4
-  has_many :subscribed_users, class_name: 'UserSubscription', dependent: :destroy, counter_cache: :users_count, foreign_key: :subsciption_id, inverse_of: :subscription
-  has_many :users, through: :subscribed_users, source: :user
+  has_many :user_subscriptions, dependent: :destroy, counter_cache: :users_count
+  has_many :users, through: :subscribed_users
 
   validates :name, :price, :validity, presence: true
   validates :users_count, numericality: { less_than_or_equal_to: MAXIMUN_USER_COUNT }
